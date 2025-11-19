@@ -3,158 +3,228 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Tickets Wi-Fi</title>
+    <title>Tickets Wi-Fi – Portail Captif</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #003366, #00b4db);
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
             min-height: 100vh;
+            padding: 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
+            position: relative;
+            overflow: hidden;
         }
 
+        /* ==== STARS BACKGROUND ==== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: .3; }
+            50% { opacity: 1; }
+        }
+
+        /* ==== MAIN CONTAINER ==== */
         .container {
-            background-color: rgba(0, 55, 102, 0.85);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 0 20px rgba(0, 180, 219, 0.6);
-            width: 90%;
-            max-width: 700px;
+            background: rgba(20, 20, 30, 0.92);
+            padding: 2.5rem;
+            border-radius: 22px;
+            width: 95%;
+            max-width: 780px;
             text-align: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 35px rgba(102, 126, 234, 0.4);
+            animation: fadeIn .6s ease-out;
         }
 
-        .plans-box h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #00d2ff;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* TITLE */
+        h3 {
+            font-size: 2.3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        /* === PLANS GRID === */
         .plans {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 22px;
         }
 
         .plan {
-            background: #005080;
+            background: rgba(40, 40, 60, 0.85);
             padding: 20px;
-            border-radius: 12px;
-            width: 150px;
-            box-shadow: 0 4px 10px rgba(0, 180, 219, 0.3);
-            transition: background-color 0.3s ease;
+            border-radius: 14px;
+            width: 160px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.25);
+            transition: transform .3s, box-shadow .3s;
+            border: 1px solid rgba(120, 120, 255, 0.2);
         }
 
         .plan:hover {
-            background-color: #0088cc;
+            transform: translateY(-4px);
+            box-shadow: 0 0 28px rgba(102, 126, 234, 0.45);
         }
 
         .plan h4 {
-            margin: 0 0 10px;
-            font-size: 20px;
-            color: #00e5ff;
+            font-size: 22px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #8ab4ff, #d29cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .plan p {
-            font-size: 14px;
-            margin-bottom: 15px;
-            color: #cceeff;
+            font-size: 13px;
+            margin-bottom: 16px;
+            color: #dcdcff;
         }
 
+        /* === BUTTON BUY === */
         .plan button {
-            background-color: #00b4db;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
             color: white;
             padding: 10px;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: opacity .3s;
         }
 
         .plan button:hover {
-            background-color: #008bbf;
+            opacity: 0.85;
         }
 
+        /* === RETURN BUTTON === */
         .btn-secondary {
-            background-color: transparent;
-            color: #00d2ff;
-            border: 2px solid #00d2ff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
+            background: transparent;
+            border: 2px solid #764ba2;
+            color: #a580ff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
             cursor: pointer;
             font-weight: 600;
             font-size: 1rem;
             margin-top: 2rem;
-            transition: all 0.3s ease;
+            transition: all .3s;
         }
 
         .btn-secondary:hover {
-            background-color: #00d2ff;
-            color: #003366;
+            background: #764ba2;
+            color: white;
         }
 
         @media (max-width: 600px) {
-            .plans {
-                flex-direction: column;
-            }
-
             .plan {
                 width: 100%;
                 max-width: 300px;
-                margin: 0 auto;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="plans-box">
-            <h3>Choisissez votre ticket</h3>
-            <div class="plans">
-                <div class="plan">
-                    <h4>200 FCFA</h4>
-                    <p>5 Heures d'accès</p>
-                    <button class="pay-btn external-pay" data-url="https://ticketwifi.com/tickets/pay_ticket_of/4732">
-                        Acheter
-                    </button>
-                </div>
 
-                <div class="plan">
-                    <h4>500 FCFA</h4>
-                    <p>24 heures d'accès</p>
-                    <button class="pay-btn" data-amount="500" data-desc="24H" data-type="24h">Acheter</button>
-                </div>
-                <div class="plan">
-                    <h4>1000 FCFA</h4>
-                    <p>Accès illimité - 3 jours</p>
-                    <button class="pay-btn" data-amount="1000" data-desc="3J" data-type="3j">Acheter</button>
-                </div>
-                <div class="plan">
-                    <h4>2500 FCFA</h4>
-                    <p>Accès illimité - 7 jours</p>
-                    <button class="pay-btn" data-amount="2500" data-desc="7J" data-type="7j">Acheter</button>
-                </div>
-                <div class="plan">
-                    <h4>5000 FCFA</h4>
-                    <p>Accès illimité - 30 jours</p>
-                    <button class="pay-btn" data-amount="5000" data-desc="30J" data-type="30j">Acheter</button>
-                </div>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <h3>Choisissez votre ticket Wi-Fi</h3>
+
+        <div class="plans">
+
+            <div class="plan">
+                <h4>200 FCFA</h4>
+                <p>5 Heures d'accès</p>
+                <button class="pay-btn external-pay" data-url="https://ticketwifi.com/tickets/pay_ticket_of/4732">
+                    Acheter
+                </button>
             </div>
-            <button class="btn-secondary" onclick="window.location.href='login.html'">Retour à la connexion</button>
+
+            <div class="plan">
+                <h4>500 FCFA</h4>
+                <p>24 heures d'accès</p>
+                <button class="pay-btn" data-amount="500" data-desc="24H" data-type="24h">Acheter</button>
+            </div>
+
+            <div class="plan">
+                <h4>1000 FCFA</h4>
+                <p>Accès illimité • 3 jours</p>
+                <button class="pay-btn" data-amount="1000" data-desc="3J" data-type="3j">Acheter</button>
+            </div>
+
+            <div class="plan">
+                <h4>2500 FCFA</h4>
+                <p>Accès illimité • 7 jours</p>
+                <button class="pay-btn" data-amount="2500" data-desc="7J" data-type="7j">Acheter</button>
+            </div>
+
+            <div class="plan">
+                <h4>5000 FCFA</h4>
+                <p>Accès illimité • 30 jours</p>
+                <button class="pay-btn" data-amount="5000" data-desc="30J" data-type="30j">Acheter</button>
+            </div>
+
         </div>
+
+        <button class="btn-secondary" onclick="window.location.href='login.html'">Retour à la connexion</button>
     </div>
 
     <script>
+        // STARS GENERATOR
+        const stars = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            s.style.left = Math.random() * 100 + '%';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.animationDelay = Math.random() * 3 + 's';
+            stars.appendChild(s);
+        }
+
+        // FEDAPAY — DO NOT TOUCH
         document.querySelectorAll('.pay-btn').forEach(button => {
             button.addEventListener('click', function () {
                 const montant = this.getAttribute('data-amount');
@@ -175,13 +245,13 @@
                         phone_number: { number: "64000001", country: "BJ" }
                     },
                     onComplete: function (response) {
-                        // Redirige vers le script qui génère le ticket
                         window.location.href = "/create-acces.php?type=" + type;
                     }
                 });
             });
         });
     </script>
+
 </body>
 
 </html>
