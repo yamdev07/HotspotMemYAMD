@@ -50,8 +50,15 @@
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: .3; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: .3;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* ==== MAIN CONTAINER ==== */
@@ -70,8 +77,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* TITLE */
@@ -176,35 +190,37 @@
         <div class="plans">
 
             <div class="plan">
-                <h4>200 FCFA</h4>
-                <p>5 Heures d'accès</p>
+                <h4>100 FCFA</h4>
+                <p>2 Heures d'accès</p>
                 <button class="pay-btn external-pay" data-url="https://ticketwifi.com/tickets/pay_ticket_of/4732">
                     Acheter
                 </button>
             </div>
 
             <div class="plan">
+                <h4>200 FCFA</h4>
+                <P> 5 heures d'accès</P>
+                <p>Validité • 24h</p>
+                <button class="pay-btn" data-amount="200" data-desc="5H" data-type="5h">Acheter</button>
+            </div>
+
+            <div class="plan">
                 <h4>500 FCFA</h4>
-                <p>24 heures d'accès</p>
-                <button class="pay-btn" data-amount="500" data-desc="24H" data-type="24h">Acheter</button>
+                <p>Accès illimité • 3 jours</p>
+                <P>Validité . 4 jours</P>
+                <button class="pay-btn" data-amount="500" data-desc="3J" data-type="3j">Acheter</button>
             </div>
 
             <div class="plan">
                 <h4>1000 FCFA</h4>
-                <p>Accès illimité • 3 jours</p>
-                <button class="pay-btn" data-amount="1000" data-desc="3J" data-type="3j">Acheter</button>
-            </div>
-
-            <div class="plan">
-                <h4>2500 FCFA</h4>
                 <p>Accès illimité • 7 jours</p>
-                <button class="pay-btn" data-amount="2500" data-desc="7J" data-type="7j">Acheter</button>
+                <button class="pay-btn" data-amount="5000" data-desc="7J" data-type="7J">Acheter</button>
             </div>
 
             <div class="plan">
-                <h4>5000 FCFA</h4>
+                <h4>3000 FCFA</h4>
                 <p>Accès illimité • 30 jours</p>
-                <button class="pay-btn" data-amount="5000" data-desc="30J" data-type="30j">Acheter</button>
+                <button class="pay-btn" data-amount="3000" data-desc="30J" data-type="30j">Acheter</button>
             </div>
 
         </div>
